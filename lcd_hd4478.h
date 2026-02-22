@@ -12,7 +12,8 @@
 extern "C" {
 #endif
 #include <stdint.h>
-#include "lcd_config.h"
+#include <xc.h>
+#include <lcd_config.h>
     
 typedef struct {
     uint8_t  lcd_2_number_line:1;

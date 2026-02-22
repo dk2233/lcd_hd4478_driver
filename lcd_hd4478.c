@@ -6,8 +6,6 @@
  */
 
 
-#include <xc.h>
-#include "lcd_config.h"
 #include "lcd_hd4478.h"
 
 static inline void lcdhd4478_enable();
