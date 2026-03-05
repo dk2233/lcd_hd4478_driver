@@ -8,7 +8,7 @@
 
 #include "lcd_hd4478.h"
 
-static inline void lcdhd4478_enable();
+static inline void lcdhd4478_enable(void);
 
 static inline void lcdhd4478_clear_data_port(void);
 
@@ -16,8 +16,8 @@ static inline void lcdhd4478_clear_data_port(void);
 static inline void lcdhd4478_enable(void)
 {
     LCD_PORT_E.LCD_PORT_E_PIN = 1;
-    NOP();
-    NOP();
+    NOP_FUNC;
+    NOP_FUNC;
     LCD_PORT_E.LCD_PORT_E_PIN = 0;
     
 }
@@ -64,7 +64,7 @@ static void lcdhd4478_check_busy(void)
         port_data_state = LCD_PORT_DATA & 0xf0;
         
         LCD_PORT_E.LCD_PORT_E_PIN = 0;
-        NOP();
+        NOP_FUNC;
         LCD_PORT_E.LCD_PORT_E_PIN = 1;
         
         port_data_state += ((LCD_PORT_DATA  & 0xf0) >> 4);
@@ -72,7 +72,7 @@ static void lcdhd4478_check_busy(void)
         port_data_state = LCD_PORT_DATA & 0x0f;
         
         LCD_PORT_E.LCD_PORT_E_PIN = 0;
-        NOP();
+        NOP_FUNC;
         LCD_PORT_E.LCD_PORT_E_PIN = 1;
         
         port_data_state |= ((LCD_PORT_DATA  & 0x0f) << 4);
@@ -141,9 +141,10 @@ void lcdhd4478_write(char * word)
     } while(*word !='\0');
 }
 
-void lcdhd4478_init(lcdhd4478_configuration_t lcd_config) 
+void lcdhd4478_init(lcdhd4478_configuration_t *lcd_conf_p) 
 {
     uint8_t  is_8bit = 0;
+    lcdhd4478_configuration_t lcd_config = *lcd_conf_p;
     LCD_PORT_TRIS_DATA &= lcd_tris_normal_state_mask;
     LCD_PORT_TRIS_E.LCD_PORT_E_TRIS_BIT = 0;
     LCD_PORT_TRIS_RS.LCD_PORT_RS_TRIS_BIT = 0;

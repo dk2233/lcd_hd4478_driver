@@ -11,8 +11,8 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+    
 #include <stdint.h>
-#include <xc.h>
 #include <lcd_config.h>
     
 typedef struct {
@@ -110,7 +110,7 @@ typedef struct {
 #define lcdhd4478_set_CGRAM_addres(x)   lcdhd4478_send_data(lcd_cmd_CGRAM_address_set +x);
 
    
-extern void lcdhd4478_init(lcdhd4478_configuration_t lcd_config);
+extern void lcdhd4478_init(lcdhd4478_configuration_t *lcd_conf_p);
 
 extern void lcdhd4478_send_data(uint8_t data);
     
